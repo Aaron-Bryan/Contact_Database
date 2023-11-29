@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static ArrayList<Contacts> contacts;
+    private static ArrayList<Contacts> contacts_arraylist;
     private static Scanner user_input;
 
     //Methods
@@ -76,25 +76,61 @@ public class Main {
     }
 
     //Function Methods - Manage contacts
-    private static void add_new_contact(){
+    private static void show_contacts(){
+        System.out.println("Showing all contacts..");
+        for(Contacts ctr: contacts_arraylist){
+            ctr.get_contact_details();
+        }
 
+        option_select();
+    }
+
+    private static void add_new_contact(){
+        System.out.println("Adding new Contact");
+
+        System.out.println("Please enter contact's name: ");
+        String new_name = user_input.next();
+        System.out.println("Please enter contact's number: ");
+        String new_number = user_input.next();
+        System.out.println("Please enter contact's email: ");
+        String new_email = user_input.next();
+
+        if (new_name.equals("") || new_number.equals("") || new_email.equals("")){
+            System.out.println("Invalid, Please fill all fields");
+            add_new_contact();
+        }
+        else {
+            Contacts new_contact = new Contacts(new_name, new_number, new_email);
+            contacts_arraylist.add(new_contact);
+        }
+
+        option_select();
     }
 
     private static void contact_search(){
-
-    }
-
-    private static void show_contacts(){
+        System.out.println("Please enter the contact name you want to search: ");
+        String search_name = user_input.next();
+        if (search_name.equals("")){
+            System.out.println("Invalid, Please fill all fields");
+            add_new_contact();
+        }
+        else {
+            for (Contacts ctr: contacts_arraylist){
+                if (ctr.getContact_name().equals(search_name)){
+                    ctr.get_contact_details();
+                }
+            }
+        }
 
     }
 
     private static void delete_contact(){
-
+        System.out.println("Please enter the contact name you want to delete: ");
     }
 
     public static void main(String[] args) {
 
-        contacts = new ArrayList<>();
+        contacts_arraylist = new ArrayList<>();
 
         //Greet the user
         System.out.println("Greetings mf");
