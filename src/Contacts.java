@@ -57,7 +57,7 @@ public class Contacts {
     }
 
     //Methods
-    public void get_contacts() {
+    public void get_contact_details() {
         System.out.println("Name: " + this.contact_name);
         System.out.println("Contact Number: " + this.contact_no);
         System.out.println("Email Address: " + this.email);
