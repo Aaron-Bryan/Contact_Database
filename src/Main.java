@@ -6,6 +6,8 @@ public class Main {
     private static ArrayList<Contacts> contacts_arraylist;
     private static Scanner user_input;
 
+    boolean contact_exists = true;
+
     //Methods
     //Menu Methods
     private static void option_select() {
@@ -75,6 +77,7 @@ public class Main {
         int choice = user_input.nextInt();
     }
 
+
     //Function Methods - Manage contacts
     private static void show_contacts(){
         System.out.println("Showing all contacts..");
@@ -104,6 +107,7 @@ public class Main {
             contacts_arraylist.add(new_contact);
         }
 
+
         option_select();
     }
 
@@ -115,17 +119,47 @@ public class Main {
             add_new_contact();
         }
         else {
+            boolean contact_exists = false;
             for (Contacts ctr: contacts_arraylist){
                 if (ctr.getContact_name().equals(search_name)){
+                    contact_exists = true;
                     ctr.get_contact_details();
                 }
             }
+
+            if (contact_exists == false){
+                System.out.println("Contact does not exist");
+            }
+
         }
 
+        option_select();
     }
 
     private static void delete_contact(){
         System.out.println("Please enter the contact name you want to delete: ");
+        String delete_name = user_input.next();
+
+        if (delete_name.equals("")) {
+            System.out.println("Fill the field mf");
+            delete_contact();
+        }
+        else {
+            boolean contact_exists = false;
+            for (Contacts ctr:contacts_arraylist){
+                if (ctr.getContact_name().equals(delete_name)){
+                    contact_exists = true;
+                    contacts_arraylist.remove(ctr);
+                }
+            }
+
+            if (contact_exists = false) {
+                System.out.println("Contact does not exist");
+                delete_contact();
+            }
+        }
+
+        option_select();
     }
 
     public static void main(String[] args) {
