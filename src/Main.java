@@ -89,6 +89,8 @@ public class Main {
     }
 
     private static void add_new_contact(){
+        boolean contact_exists = false;
+
         System.out.println("Adding new Contact");
 
         System.out.println("Please enter contact's name: ");
@@ -98,15 +100,31 @@ public class Main {
         System.out.println("Please enter contact's email: ");
         String new_email = user_input.next();
 
-        if (new_name.equals("") || new_number.equals("") || new_email.equals("")){
+        if (new_name.equals("") || new_number.equals("") || new_email.equals("")) {
             System.out.println("Invalid, Please fill all fields");
             add_new_contact();
         }
         else {
+            for (Contacts ctr: contacts_arraylist){
+                if (ctr.getContact_name().equals(new_name)){
+                    contact_exists = true;
+                    System.out.println("Contact already exists");
+                    ctr.get_contact_details();
+                }
+            }
+
+            if (contact_exists == false){
+                Contacts new_contact = new Contacts(new_name, new_number, new_email);
+                contacts_arraylist.add(new_contact);
+            }
+        }
+
+        /*
+        else {
             Contacts new_contact = new Contacts(new_name, new_number, new_email);
             contacts_arraylist.add(new_contact);
         }
-
+        */
 
         option_select();
     }
@@ -153,7 +171,7 @@ public class Main {
                 }
             }
 
-            if (contact_exists = false) {
+            if (contact_exists == false) {
                 System.out.println("Contact does not exist");
                 delete_contact();
             }
