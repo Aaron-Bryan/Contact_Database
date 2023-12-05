@@ -4,6 +4,7 @@ import java.util.Scanner;
 public class Main {
 
     private static ArrayList<Contacts> contacts_arraylist;
+    private static ArrayList<Messages> messages_arraylist;
     private static Scanner user_input;
 
     boolean contact_exists = true;
@@ -17,6 +18,7 @@ public class Main {
         System.out.println("2.Messages");
         System.out.println("3.Quit");
 
+        user_input = new Scanner(System.in);
         int choice = user_input.nextInt();
 
         switch (choice){
@@ -45,24 +47,27 @@ public class Main {
         System.out.println("4.Delete a contact");
         System.out.println("5.Return to menu");
 
-        user_input = new Scanner(System.in);
         int choice = user_input.nextInt();
 
         switch (choice){
-            case(1):
+            case (1):
                 show_contacts();
                 break;
-            case(2):
+            case (2):
                 add_new_contact();
                 break;
-            case(3):
+            case (3):
                 contact_search();
                 break;
-            case(4):
+            case (4):
                 delete_contact();
                 break;
-            case(5):
+            case (5):
                 option_select();
+                break;
+            default:
+                System.out.println("Choose mf");
+                manage_contacts();
                 break;
         }
 
@@ -71,10 +76,29 @@ public class Main {
     private static void manage_messages() {
         System.out.println("What would you like to do?");
 
-        //TODO Options to select on the Messages section
+        System.out.println("What would you like to do?");
 
-        user_input = new Scanner(System.in);
+        System.out.println("1.Show all messages");
+        System.out.println("2.Send a new message");
+        System.out.println("3.Return to menu");
+
         int choice = user_input.nextInt();
+
+        switch (choice){
+            case (1):
+                show_messages();
+                break;
+            case (2):
+                send_message();
+                break;
+            case (3):
+                option_select();
+                break;
+            default:
+                System.out.println("Choose mf");
+                manage_messages();
+                break;
+        }
     }
 
 
@@ -83,6 +107,7 @@ public class Main {
         System.out.println("Showing all contacts..");
         for(Contacts ctr: contacts_arraylist){
             ctr.get_contact_details();
+            System.out.println("*******************");
         }
 
         option_select();
@@ -164,7 +189,7 @@ public class Main {
         }
         else {
             boolean contact_exists = false;
-            for (Contacts ctr:contacts_arraylist){
+            for (Contacts ctr: contacts_arraylist){
                 if (ctr.getContact_name().equals(delete_name)){
                     contact_exists = true;
                     contacts_arraylist.remove(ctr);
@@ -179,6 +204,19 @@ public class Main {
 
         option_select();
     }
+
+
+    //Function methods - manage messages
+    private static void show_messages() {
+        //TODO The body of this function
+
+    }
+
+    private static void send_message() {
+        //TODO The body of this function
+
+    }
+
 
     public static void main(String[] args) {
 
