@@ -208,7 +208,13 @@ public class Main {
 
     //Function methods - manage messages
     private static void show_messages() {
-        //TODO The body of this function
+        messages_arraylist = new ArrayList<>();
+
+        for (Contacts ctr: contacts_arraylist){
+            messages_arraylist.addAll(ctr.getMessages_list());
+        }
+
+        //TODO Continue here
 
     }
 
