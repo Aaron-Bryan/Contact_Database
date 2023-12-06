@@ -127,6 +127,7 @@ public class Main {
 
         if (new_name.equals("") || new_number.equals("") || new_email.equals("")) {
             System.out.println("Invalid, Please fill all fields");
+            System.out.println("*******************");
             add_new_contact();
         }
         else {
@@ -135,12 +136,14 @@ public class Main {
                     contact_exists = true;
                     System.out.println("Contact already exists");
                     ctr.get_contact_details();
+                    System.out.println("*******************");
                 }
             }
 
             if (contact_exists == false){
                 Contacts new_contact = new Contacts(new_name, new_number, new_email);
                 contacts_arraylist.add(new_contact);
+                System.out.println("*******************");
             }
         }
 
@@ -155,23 +158,27 @@ public class Main {
     }
 
     private static void contact_search(){
+        boolean contact_exists = false;
+
         System.out.println("Please enter the contact name you want to search: ");
         String search_name = user_input.next();
         if (search_name.equals("")){
             System.out.println("Invalid, Please fill all fields");
-            add_new_contact();
+            System.out.println("*******************");
+            contact_search();
         }
         else {
-            boolean contact_exists = false;
             for (Contacts ctr: contacts_arraylist){
                 if (ctr.getContact_name().equals(search_name)){
                     contact_exists = true;
                     ctr.get_contact_details();
+                    System.out.println("*******************");
                 }
             }
 
             if (contact_exists == false){
                 System.out.println("Contact does not exist");
+                System.out.println("*******************");
             }
 
         }
@@ -180,25 +187,30 @@ public class Main {
     }
 
     private static void delete_contact(){
+        boolean contact_exists = false;
+
         System.out.println("Please enter the contact name you want to delete: ");
         String delete_name = user_input.next();
 
         if (delete_name.equals("")) {
             System.out.println("Fill the field mf");
+            System.out.println("*******************");
             delete_contact();
         }
         else {
-            boolean contact_exists = false;
             for (Contacts ctr: contacts_arraylist){
                 if (ctr.getContact_name().equals(delete_name)){
                     contact_exists = true;
                     contacts_arraylist.remove(ctr);
+                    System.out.println("Contact has been deleted");
+                    System.out.println("*******************");
                 }
             }
 
             if (contact_exists == false) {
                 System.out.println("Contact does not exist");
-                delete_contact();
+                System.out.println("*******************");
+                option_select();
             }
         }
 
@@ -214,7 +226,12 @@ public class Main {
             messages_arraylist.addAll(ctr.getMessages_list());
         }
 
-        //TODO Continue here
+        if (messages_arraylist.size() > 0) {
+            for (Messages ctr: messages_arraylist) {
+                ctr.get_message_details();
+                System.out.println("*******************");
+            }
+        }
 
     }
 
