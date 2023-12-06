@@ -37,7 +37,7 @@ public class Messages {
     }
 
     //Methods
-    public void get_message() {
+    public void get_message_details() {
         System.out.println("Contact Name: " + this.message_contact_name);
         System.out.println("Message: " + this.message);
     }
