@@ -198,15 +198,20 @@ public class Main {
             System.out.println("*******************");
             delete_contact();
         }
+
+        //TODO The error is here
+        //The error happens after deletion
         else {
             for (Contacts ctr: contacts_arraylist){
                 if (ctr.getContact_name().equals(delete_name)){
                     contact_exists = true;
+                    //ctr.get_contact_details();
                     contacts_arraylist.remove(ctr);
                     System.out.println("Contact has been deleted");
                     System.out.println("*******************");
                 }
             }
+        //TODO The error is here
 
             if (contact_exists == false) {
                 System.out.println("Contact does not exist");
