@@ -187,6 +187,7 @@ public class Main {
     }
 
     private static void delete_contact(){
+        //TODO There's an error when you try to delete a contact, gotta fix that soon.
         boolean contact_exists = false;
 
         System.out.println("Please enter the contact name you want to delete: ");
@@ -232,11 +233,43 @@ public class Main {
                 System.out.println("*******************");
             }
         }
+        else {
+            System.out.println("No messages.");
+        }
+
+        option_select();
 
     }
 
     private static void send_message() {
-        //TODO The body of this function
+        boolean contact_exists = false;
+
+        System.out.println("Enter message recepient: ");
+        String send_name = user_input.next();
+
+        if (send_name.equals("")) {
+            System.out.println("Fill out the field mf");
+            System.out.println("*******************");
+
+            send_message();
+        }
+
+        else {
+            for (Contacts ctr: contacts_arraylist) {
+                if (ctr.getContact_name().equals(send_name)) {
+                    contact_exists = true;
+                }
+            }
+
+            if (contact_exists == true){
+                System.out.println("Enter Message: ");
+                String send_message = user_input.next();
+                //TODO Continue here
+            }
+            else if (contact_exists == false) {
+                System.out.println("No conrtact found.");
+            }
+        }
 
     }
 
