@@ -245,6 +245,7 @@ public class Main {
 
     }
 
+    //TODO Error here
     private static void send_message() {
         boolean contact_exists = false;
 
@@ -277,7 +278,7 @@ public class Main {
 
                         //Put the new messages in and ArrayList
                         ArrayList<Messages> new_messages = ctr.getMessages_list();
-                        new_messages.addAll(new_messages);
+                        new_messages.addAll(new_message);
 
                         //Update the message arraylist
                         ctr.setMessages_list(new_messages);
