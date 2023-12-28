@@ -6,6 +6,7 @@ public class Main {
     private static ArrayList<Contacts> contacts_arraylist;
     private static ArrayList<Messages> messages_arraylist;
     private static Scanner user_input;
+    private static int contact_id = 0;
 
     boolean contact_exists = true;
 
@@ -32,7 +33,7 @@ public class Main {
                 //Quit
                 break;
             default:
-                System.out.println("Choose one of the choices mf");
+                System.out.println("Choose o    ne of the choices mf");
                 break;
         }
 
@@ -187,19 +188,17 @@ public class Main {
     }
 
     private static void delete_contact(){
-        //TODO There's an error when you try to delete a contact, gotta fix that soon.
         boolean contact_exists = false;
 
         System.out.println("Please enter the contact name you want to delete: ");
         String delete_name = user_input.next();
 
         if (delete_name.equals("")) {
-            System.out.println("Fill the field mf");
+            System.out.println("Please fill the field");
             System.out.println("*******************");
             delete_contact();
         }
 
-        //TODO The error is here
         //The error happens after deletion
         else {
             for (Contacts ctr: contacts_arraylist){
@@ -209,9 +208,9 @@ public class Main {
                     contacts_arraylist.remove(ctr);
                     System.out.println("Contact has been deleted");
                     System.out.println("*******************");
+                    option_select();
                 }
             }
-        //TODO The error is here
 
             if (contact_exists == false) {
                 System.out.println("Contact does not exist");
@@ -246,6 +245,7 @@ public class Main {
 
     }
 
+    //TODO Error here
     private static void send_message() {
         boolean contact_exists = false;
 
@@ -269,12 +269,28 @@ public class Main {
             if (contact_exists == true){
                 System.out.println("Enter Message: ");
                 String send_message = user_input.next();
-                //TODO Continue here
+
+                contact_id++;
+                Messages new_message = new Messages(send_message, send_name, contact_id);
+
+                for (Contacts ctr: contacts_arraylist){
+                    if (ctr.getContact_name().equals(send_name)){
+
+                        //Put the new messages in and ArrayList
+                        ArrayList<Messages> new_messages = ctr.getMessages_list();
+                        new_messages.addAll(new_message);
+
+                        //Update the message arraylist
+                        ctr.setMessages_list(new_messages);
+                    }
+                }
             }
             else if (contact_exists == false) {
-                System.out.println("No conrtact found.");
+                System.out.println("No contact found.");
             }
         }
+
+        option_select();
 
     }
 
