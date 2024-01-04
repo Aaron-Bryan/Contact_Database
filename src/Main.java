@@ -249,49 +249,44 @@ public class Main {
     private static void send_message() {
         boolean contact_exists = false;
 
-        System.out.println("Enter message recepient: ");
+        System.out.println("Enter recipient of the message: ");
         String send_name = user_input.next();
 
-        if (send_name.equals("")) {
-            System.out.println("Fill out the field mf");
-            System.out.println("*******************");
-
-            send_message();
+        for (Contacts ctr: contacts_arraylist){
+            if (ctr.getContact_name().equals(send_name)) {
+                contact_exists = true;
+            }
         }
 
-        else {
+        if (contact_exists == true){
+            System.out.println("Message: ");
+            String send_text = user_input.next();
+
+            contact_id = contact_id + 1;
+
+            Messages new_message = new Messages(send_text, send_name, contact_id);
+
             for (Contacts ctr: contacts_arraylist) {
                 if (ctr.getContact_name().equals(send_name)) {
-                    contact_exists = true;
+                    //Gets the message and puts it on the arraylist
+                    ArrayList<Messages> new_message_arraylist = ctr.getMessages_list();
+                    new_message_arraylist.add(new_message);
+                    Contacts current_contact = ctr;
+                    current_contact.setMessages_list(new_message_arraylist);
+
+                    //Updates the contact arraylist
+                    contacts_arraylist.remove(ctr);
+                    contacts_arraylist.add(current_contact);
                 }
             }
+        }
 
-            if (contact_exists == true){
-                System.out.println("Enter Message: ");
-                String send_message = user_input.next();
-
-                contact_id++;
-                Messages new_message = new Messages(send_message, send_name, contact_id);
-
-                for (Contacts ctr: contacts_arraylist){
-                    if (ctr.getContact_name().equals(send_name)){
-
-                        //Put the new messages in and ArrayList
-                        ArrayList<Messages> new_messages = ctr.getMessages_list();
-                        new_messages.addAll(new_message);
-
-                        //Update the message arraylist
-                        ctr.setMessages_list(new_messages);
-                    }
-                }
-            }
-            else if (contact_exists == false) {
-                System.out.println("No contact found.");
-            }
+        else if (contact_exists == false){
+            System.out.println("Contact does not exist.");
+            System.out.println("*******************");
         }
 
         option_select();
-
     }
 
 
