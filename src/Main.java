@@ -249,7 +249,7 @@ public class Main {
     private static void send_message() {
         boolean contact_exists = false;
 
-        System.out.println("Enter recipient of the message: ");
+        System.out.println("Enter message recepient: ");
         String send_name = user_input.next();
 
         for (Contacts ctr: contacts_arraylist){
